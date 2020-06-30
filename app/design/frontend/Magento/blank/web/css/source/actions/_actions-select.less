@@ -11,6 +11,7 @@
 //  Variables
 //  _____________________________________________
 @action__height: 3.2rem;
+@action__width: 3.2rem;
 
 //  Triangle marker
 @button-marker-triangle__height: .5rem;
@@ -65,6 +66,10 @@
             right: 0;
             font-size: @action__height;
             line-height: 1;
+            width: @action__width;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
 
         &._active {
