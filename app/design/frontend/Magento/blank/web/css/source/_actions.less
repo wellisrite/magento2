@@ -1,0 +1,97 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+//
+//  Imports
+//  _____________________________________________
+@import 'actions/_actions-select.less';
+@import 'actions/_actions-multiselect.less';
+
+//  ToDo UI: move it to Utilities -> Actions
+//  Actions
+//  _____________________________________________
+
+.action-reset() {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+
+    &:hover {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+    }
+}
+
+//  ToDo UI: move it to Utilities -> Effects
+//  Effects
+//  _____________________________________________
+
+.transition (
+    @_property: all,
+    @_duration: .1s,
+    @_timing-function: linear
+) {
+    transition: @_property @_duration @_timing-function;
+}
+
+.scale (
+    @_size: .9
+) {
+    transform: scale(@_size);
+}
+
+//  ToDo UI: move it to Utilities
+//  Utilities
+//  _____________________________________________
+
+.hidden() {
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+    position: absolute;
+}
+
+//
+//  Extends
+//  _____________________________________________
+
+.abs-action-reset {
+    .action-reset();
+}
+
+//
+//  Specific actions
+//  ---------------------------------------------
+
+.action-close {
+    > span {
+        .hidden();
+    }
+
+    &:extend(.abs-action-reset all);
+
+    &:active {
+        .scale();
+    }
+
+    .lib-icon-font(
+        @_icon-font: @icon-font,
+        @_icon-font-content: @icon-close-mage__content,
+        @_icon-font-line-height: 1,
+        @_icon-font-vertical-align: middle,
+        @_icon-font-position: before
+    );
+
+    &:before {
+        .transition(color);
+    }
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+    }
+}
