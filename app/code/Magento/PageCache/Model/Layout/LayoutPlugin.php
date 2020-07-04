@@ -72,14 +72,14 @@ class LayoutPlugin
      */
     public function afterGetOutput(Layout $subject, $result)
     {
-        if ($subject->isCacheable() && $this->config->isEnabled()) {
-            $tags = [[]];
-            $isVarnish = $this->config->getType() === Config::VARNISH;
+        $isVarnish = $this->config->getType() === Config::VARNISH;
 
+        if ($subject->isCacheable() && $this->config->isEnabled() && !$isVarnish) {
+            $tags = [[]];
             foreach ($subject->getAllBlocks() as $block) {
                 if ($block instanceof IdentityInterface) {
                     $isEsiBlock = $block->getTtl() > 0;
-                    if ($isVarnish && $isEsiBlock) {
+                    if ($isEsiBlock) {
                         continue;
                     }
                     $tags[] = $block->getIdentities();
